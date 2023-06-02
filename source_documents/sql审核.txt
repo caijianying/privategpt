@@ -1,0 +1,21 @@
+sql审核定义：
+因业务新增，修改功能而引起的sql的变动，都需要进行性能审核。
+流程如下：
+开发在提前功能测试的同时，需要提交一份变动的sql给dba和tl 做性能审核，tl做第一次把关，dba做兜底把关
+提供内容包括：
+1：表结构变更脚本
+例： alter table xxx add column xxx;
+2：数据初始化脚本
+例：insert into xxx(columns) values (values)
+3：业务功能sql和访问频率预估值
+例：select col1,col2,col3 from xxx where col1=xx and col2 >=xxx
+100次每秒
+4:  表容量预估值
+例：
+表名： xxx     3年  1000万数据量
+5：复杂业务，尽可能保证是手写sql，方便在出现性能问题，及时调优
+
+（如果无法提供实际sql . 请提供表名+ 查询组合字段）
+dba在审核完后。根据需要给出修改建议。
+开发根据建议修改完成。审核通过。
+线上发布
